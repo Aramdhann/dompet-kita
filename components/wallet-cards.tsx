@@ -3,6 +3,7 @@
 import { Wallet, CreditCard, PiggyBank, WalletIcon } from 'lucide-react';
 import { WalletCard } from '@/components/wallet-card';
 import Link from 'next/link';
+import { Button } from './ui/button';
 
 interface WalletCardsProps {
   visible: boolean;
@@ -62,9 +63,9 @@ export function WalletCards({ visible }: WalletCardsProps) {
     <div className="flex flex-col gap-5 m-5">
       <div className="flex justify-between items-center">
         <p className="text-sm font-semibold text-gray-700">Dompet Saya</p>
-        <div className="py-1 px-3 bg-blue-50 rounded-2xl border border-blue-700">
-          <p className="text-sm text-blue-700">+ Tambah</p>
-        </div>
+        <Button variant="outline" className="text-sm text-blue-700">
+          + Tambah
+        </Button>
       </div>
       <div className="flex gap-3 overflow-x-auto pb-2 -mx-5 px-5 scrollbar-hide scroll-smooth snap-x">
         {wallets.slice(0, 4).map((wallet) => (

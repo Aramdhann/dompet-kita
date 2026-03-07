@@ -10,6 +10,7 @@ import {
   WalletIcon,
 } from 'lucide-react';
 import { WalletCard } from '@/components/wallet-card';
+import { Button } from '@/components/ui/button';
 
 export default function DompetPage() {
   const [visible, setVisible] = useState(true);
@@ -78,18 +79,20 @@ export default function DompetPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-bold text-gray-900">Semua Dompet</h1>
         <div className="flex gap-2">
-          <button
+          <Button
             onClick={() => setVisible(!visible)}
-            className="text-sm p-2 rounded-lg bg-blue-50 text-blue-700 shadow-sm hover:shadow-md transition-colors border border-blue-700"
+            variant="outline"
+            className="text-sm text-blue-700"
           >
             + Tambah
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => setVisible(!visible)}
-            className="text-sm p-2 rounded-lg bg-white shadow-sm hover:shadow-md transition-colors border border-blue-700"
+            variant="outline"
+            className="text-sm"
           >
             {visible ? <EyeOff size={18} /> : <Eye size={18} />}
-          </button>
+          </Button>
         </div>
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3">
