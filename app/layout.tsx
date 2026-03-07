@@ -35,8 +35,8 @@ export default function RootLayout({
           <div className="w-full max-w-3xl bg-gray-50 min-h-screen shadow-md pb-16">
             {children}
           </div>
-          <BottomNav />
         </div>
+        <BottomNav />
       </body>
     </html>
   );
