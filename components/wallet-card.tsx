@@ -1,4 +1,4 @@
-import { LucideIcon, TrendingUp, TrendingDown, Calendar } from 'lucide-react';
+import { LucideIcon, TrendingUp, TrendingDown, ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
 
 interface WalletCardProps {
   name: string;
@@ -8,7 +8,8 @@ interface WalletCardProps {
   visible: boolean;
   lastTransaction?: string;
   lastTransactionAmount?: number;
-  lastTransactionType?: 'income' | 'expense';
+  lastTransactionType?: 'income' | 'expense' | 'transfer';
+  lastTransactionDirection?: 'incoming' | 'outgoing';
 }
 
 export function WalletCard({
@@ -20,6 +21,7 @@ export function WalletCard({
   lastTransaction,
   lastTransactionAmount = 0,
   lastTransactionType,
+  lastTransactionDirection,
 }: WalletCardProps) {
   const formatAmount = (amount: number) => {
     return new Intl.NumberFormat('id-ID', {
@@ -44,11 +46,34 @@ export function WalletCard({
     return `${value}`;
   };
 
+  const isTransfer = lastTransactionType === 'transfer';
   const isIncome = lastTransactionType === 'income';
-  const sign = isIncome ? '+' : '-';
+  const isIncoming = lastTransactionDirection === 'incoming';
+
+  const getTransactionDisplay = () => {
+    if (isTransfer) {
+      const label = isIncoming ? 'In' : 'Out';
+      return `${label} ${formatTransactionAmount(lastTransactionAmount)}`;
+    }
+    const sign = isIncome ? '+' : '-';
+    return `${sign}${formatTransactionAmount(lastTransactionAmount)}`;
+  };
+
+  const getTransactionColor = () => {
+    if (isTransfer) return 'text-blue-600';
+    if (isIncome) return 'text-emerald-600';
+    return 'text-red-600';
+  };
+
+  const getTransactionIcon = () => {
+    if (isTransfer) {
+      return isIncoming ? <ArrowLeft className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />;
+    }
+    return isIncome ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />;
+  };
 
   return (
-    <div className="p-4 rounded-2xl bg-white shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow relative gap-2">
+    <div className="p-4 rounded-2xl bg-white shadow-sm flex flex-col hover:shadow-md transition-shadow relative gap-2">
       <div className="flex justify-between items-start w-full mb-2">
         <div className={`p-2.5 rounded-xl ${color} w-fit`}>
           <Icon className="w-5 h-5" />
@@ -68,10 +93,10 @@ export function WalletCard({
           {visible ? formatAmount(amount) : '••••••••'}
         </p>
         {lastTransactionAmount !== 0 && lastTransactionType && (
-          <div className={`flex items-center gap-1 text-xs ${isIncome ? 'text-emerald-600' : 'text-red-600'}`}>
-            {isIncome ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+          <div className={`flex items-center gap-1 text-xs ${getTransactionColor()}`}>
+            {getTransactionIcon()}
             <span className="text-xs font-medium">
-              {sign}{formatTransactionAmount(lastTransactionAmount)}
+              {getTransactionDisplay()}
             </span>
           </div>
         )}

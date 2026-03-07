@@ -31,7 +31,8 @@ export default function DompetPage() {
       color: 'text-yellow-600 bg-yellow-50',
       lastTransaction: '5 Mar',
       lastTransactionAmount: 750000,
-      lastTransactionType: 'expense' as const,
+      lastTransactionType: 'transfer' as const,
+      lastTransactionDirection: 'outgoing' as const,
     },
     {
       name: 'GoPay',
@@ -49,7 +50,8 @@ export default function DompetPage() {
       color: 'text-purple-600 bg-purple-50',
       lastTransaction: '1 Mar',
       lastTransactionAmount: 50000,
-      lastTransactionType: 'expense' as const,
+      lastTransactionType: 'transfer' as const,
+      lastTransactionDirection: 'incoming' as const,
     },
     {
       name: 'DANA',
@@ -102,6 +104,7 @@ export default function DompetPage() {
             lastTransaction={wallet.lastTransaction}
             lastTransactionAmount={wallet.lastTransactionAmount}
             lastTransactionType={wallet.lastTransactionType}
+            lastTransactionDirection={wallet.lastTransactionDirection}
           />
         ))}
       </div>

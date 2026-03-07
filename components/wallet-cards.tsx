@@ -24,8 +24,9 @@ const wallets = [
     amount: 2000000,
     color: 'text-yellow-600 bg-yellow-50',
     lastTransaction: '5 Mar',
-    lastTransactionAmount: 500000,
-    lastTransactionType: 'expense' as const,
+    lastTransactionAmount: 750000,
+    lastTransactionType: 'transfer' as const,
+    lastTransactionDirection: 'outgoing' as const,
   },
   {
     name: 'GoPay',
@@ -77,6 +78,7 @@ export function WalletCards({ visible }: WalletCardsProps) {
               lastTransaction={wallet.lastTransaction}
               lastTransactionAmount={wallet.lastTransactionAmount}
               lastTransactionType={wallet.lastTransactionType}
+              lastTransactionDirection={wallet.lastTransactionDirection}
             />
           </div>
         ))}
