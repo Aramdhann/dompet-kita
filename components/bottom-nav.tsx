@@ -9,6 +9,7 @@ import {
   Plus,
   ArrowUpCircle,
   ArrowDownCircle,
+  ArrowRightLeft,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -32,6 +33,12 @@ const menuItems = [
     icon: ArrowUpCircle,
     href: '/transaksi/tambah?type=pengeluaran',
     color: 'text-red-500',
+  },
+  {
+    label: 'Transfer Dompet',
+    icon: ArrowRightLeft,
+    href: '/transaksi/tambah?type=transfer',
+    color: 'text-blue-600',
   },
   {
     label: 'Tambah Dompet',
