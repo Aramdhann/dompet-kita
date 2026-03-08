@@ -13,6 +13,7 @@ import {
   HandHeart,
   Plus,
   LucideIcon,
+  Car,
 } from 'lucide-react';
 import { ExpenseCategoryCard } from '@/components/expense-category-card';
 import Link from 'next/link';
@@ -94,6 +95,13 @@ const categories: Category[] = [
     amount: 510000,
     budget: 600000,
     color: 'bg-green-600',
+  },
+  {
+    name: 'Transportasi',
+    icon: Car,
+    amount: 0,
+    budget: 500000,
+    color: 'bg-indigo-600',
   },
   {
     name: 'Shodaqoh',

@@ -45,7 +45,7 @@ export function ExpenseCategoryCard({
         <p
           className={`text-base font-semibold ${isOverBudget ? 'text-red-700' : 'text-gray-700'}`}
         >
-          {visible ? formatAmount(amount) : '••••••••'}
+          {visible ? formatAmount(remaining) : '••••••••'}
         </p>
       </div>
       <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
