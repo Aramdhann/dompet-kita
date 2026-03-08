@@ -19,7 +19,7 @@ export function WalletCards({ visible }: WalletCardsProps) {
           + Tambah
         </Button>
       </div>
-      <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide scroll-smooth snap-x">
+      <div className="flex gap-3 p-1 overflow-x-auto pb-2 scrollbar-hide scroll-smooth snap-x">
         {wallets.slice(0, 4).map((wallet) => (
           <div key={wallet.name} className="min-w-35 snap-start">
             <WalletCard

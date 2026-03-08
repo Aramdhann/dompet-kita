@@ -1,5 +1,7 @@
 import { LucideIcon, AlertTriangle } from 'lucide-react';
 import { formatAmount, formatCompactAmount, formatPercentage } from '@/lib/format';
+import { Progress } from '@/components/ui/progress';
+import { Card } from '@/components/ui/card';
 
 interface ExpenseCategoryCardProps {
   name: string;
@@ -24,8 +26,8 @@ export function ExpenseCategoryCard({
   const overBudgetAmount = Math.abs(remaining);
 
   return (
-    <div
-      className={`p-4 rounded-2xl shadow-sm border flex flex-col hover:shadow-md transition-shadow gap-3 ${isOverBudget ? 'bg-red-50 border-red-200' : 'bg-white border-0'}`}
+    <Card
+      className={`p-4 hover:shadow-md transition-shadow gap-3 ${isOverBudget ? 'bg-red-50 border-red-200' : ''}`}
     >
       <div className="flex items-start justify-between gap-2">
         <div className={`p-2.5 rounded-xl ${color} w-fit`}>
@@ -48,17 +50,16 @@ export function ExpenseCategoryCard({
           {visible ? formatAmount(remaining) : '••••••••'}
         </p>
       </div>
-      <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-        <div
-          className={`h-full rounded-full transition-all duration-300 ${isOverBudget ? 'bg-red-500' : color}`}
-          style={{ width: `${Math.min(percentage, 100)}%` }}
-        />
-      </div>
+      <Progress 
+        value={Math.min(percentage, 100)}
+        className="h-1.5"
+        indicatorClassName={isOverBudget ? 'bg-red-500' : color}
+      />
       {isOverBudget && (
         <div className="text-[10px] text-red-600 font-medium">
           Over budget {formatCompactAmount(overBudgetAmount, visible)}
         </div>
       )}
-    </div>
+    </Card>
   );
 }

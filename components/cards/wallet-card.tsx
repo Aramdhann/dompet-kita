@@ -1,5 +1,6 @@
 import { LucideIcon, TrendingUp, TrendingDown, ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
 import { formatAmount, formatCompactAmount } from '@/lib/format';
+import { Card } from '@/components/ui/card';
 
 interface WalletCardProps {
   name: string;
@@ -51,7 +52,7 @@ export function WalletCard({
   };
 
   return (
-    <div className="p-4 rounded-2xl bg-white shadow-sm flex flex-col hover:shadow-md transition-shadow relative gap-2">
+    <Card className="p-4 hover:shadow-md transition-shadow relative gap-2">
       <div className="flex justify-between items-start w-full mb-2">
         <div className={`p-2.5 rounded-xl ${color} w-fit`}>
           <Icon className="w-5 h-5" />
@@ -79,6 +80,6 @@ export function WalletCard({
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 }
