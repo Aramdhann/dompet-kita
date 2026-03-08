@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Dashboard } from '@/components/dashboard';
 import { WalletCards } from '@/components/wallet-cards';
+import { ExpenseCategories } from '@/components/expense-categories';
 
 export default function Page() {
   const [visible, setVisible] = useState(true);
@@ -11,6 +12,7 @@ export default function Page() {
     <>
       <Dashboard visible={visible} onToggle={() => setVisible(!visible)} />
       <WalletCards visible={visible} />
+      <ExpenseCategories visible={visible} />
     </>
   );
 }

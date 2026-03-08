@@ -2,6 +2,7 @@
 
 import { TrendingUp, TrendingDown, EyeOff, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { formatAmountWithPrefix } from '@/lib/format';
 
 interface DashboardProps {
   visible: boolean;
@@ -26,7 +27,7 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
           </Button>
         </div>
         <p className="text-3xl font-bold tracking-tight">
-          {visible ? 'Rp 8.000.000' : '••••••••'}
+          Rp {visible ? formatAmountWithPrefix(8000000) : '•••••••'}
         </p>
       </div>
 
@@ -41,7 +42,7 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
             </p>
           </div>
           <p className="text-base font-semibold text-emerald-200">
-            {visible ? '+ Rp 10.000.000' : '••••••••'}
+            {visible ? `+ Rp ${formatAmountWithPrefix(10000000)}` : '•••••••'}
           </p>
         </div>
         <div className="w-px bg-blue-800 self-stretch" />
@@ -53,7 +54,7 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
             </p>
           </div>
           <p className="text-base font-semibold text-rose-200">
-            {visible ? '- Rp 10.000.000' : '••••••••'}
+            {visible ? `- Rp ${formatAmountWithPrefix(10000000)}` : '•••••••'}
           </p>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { LucideIcon, TrendingUp, TrendingDown, ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
+import { formatAmount, formatCompactAmount } from '@/lib/format';
 
 interface WalletCardProps {
   name: string;
@@ -23,29 +24,6 @@ export function WalletCard({
   lastTransactionType,
   lastTransactionDirection,
 }: WalletCardProps) {
-  const formatAmount = (amount: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const formatTransactionAmount = (value: number) => {
-    if (!visible) return '••••••••';
-    if (value >= 1000000) {
-      const juta = value / 1000000;
-      const formatted = juta % 1 === 0 ? juta.toFixed(0) : juta.toFixed(1);
-      return `${formatted}jt`;
-    }
-    if (value >= 1000) {
-      const ribu = value / 1000;
-      const formatted = ribu % 1 === 0 ? ribu.toFixed(0) : ribu.toFixed(1);
-      return `${formatted}K`;
-    }
-    return `${value}`;
-  };
-
   const isTransfer = lastTransactionType === 'transfer';
   const isIncome = lastTransactionType === 'income';
   const isIncoming = lastTransactionDirection === 'incoming';
@@ -53,10 +31,10 @@ export function WalletCard({
   const getTransactionDisplay = () => {
     if (isTransfer) {
       const label = isIncoming ? 'In' : 'Out';
-      return `${label} ${formatTransactionAmount(lastTransactionAmount)}`;
+      return `${label} ${formatCompactAmount(lastTransactionAmount, visible)}`;
     }
     const sign = isIncome ? '+' : '-';
-    return `${sign}${formatTransactionAmount(lastTransactionAmount)}`;
+    return `${sign}${formatCompactAmount(lastTransactionAmount, visible)}`;
   };
 
   const getTransactionColor = () => {
