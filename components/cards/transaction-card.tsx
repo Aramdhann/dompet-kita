@@ -1,4 +1,10 @@
-import { LucideIcon, TrendingUp, TrendingDown, ArrowRight, ArrowLeft } from 'lucide-react';
+import {
+  LucideIcon,
+  TrendingUp,
+  TrendingDown,
+  ArrowRight,
+  ArrowLeft,
+} from 'lucide-react';
 import { formatAmount } from '@/lib/format';
 
 interface TransactionCardProps {
@@ -41,29 +47,46 @@ export function TransactionCard({
 
   const getTransactionIcon = () => {
     if (type === 'transfer') {
-      return direction === 'incoming' ? <ArrowLeft className="w-4 h-4" /> : <ArrowRight className="w-4 h-4" />;
+      return direction === 'incoming' ? (
+        <ArrowLeft className="w-4 h-4" />
+      ) : (
+        <ArrowRight className="w-4 h-4" />
+      );
     }
-    return type === 'income' ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />;
+    return type === 'income' ? (
+      <TrendingUp className="w-4 h-4" />
+    ) : (
+      <TrendingDown className="w-4 h-4" />
+    );
   };
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex items-center gap-3">
-        <div className={`p-2.5 rounded-xl ${categoryColor} w-fit`}>
+    <div className="flex items-center p-4 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow gap-3">
+      {/* Kiri — icon + info, flex-1 supaya mengisi sisa ruang, min-w-0 supaya truncate bisa jalan */}
+      <div className="flex items-center gap-3 flex-1 min-w-0">
+        <div className={`p-2.5 rounded-xl ${categoryColor} w-fit shrink-0`}>
           <CategoryIcon className="w-5 h-5 text-white" />
         </div>
-        <div className="flex flex-col">
-           <p className="text-sm font-medium text-gray-900">{category}</p>
-            <p className="text-[10px] text-gray-400">{transactionDate}</p>
-             {description && (
-              <p className="text-xs text-gray-500 italic truncate max-w-28">{description}</p>
-             )}
-          </div>
+        <div className="flex flex-col min-w-0">
+          <p className="text-sm font-medium text-gray-900 truncate">
+            {category}
+          </p>
+          <p className="text-[10px] text-gray-400">{transactionDate}</p>
+          {description && (
+            <p className="text-xs text-gray-500 italic truncate">
+              {description}
+            </p>
+          )}
+        </div>
       </div>
-      <div className="flex flex-col items-end gap-1">
-        <div className={`flex items-center gap-1 text-sm font-medium ${getTransactionColor()}`}>
+
+      {/* Kanan — nominal, shrink-0 supaya tidak pernah diperkecil */}
+      <div className="flex flex-col items-end shrink-0">
+        <div
+          className={`flex items-center gap-1 text-sm font-medium ${getTransactionColor()}`}
+        >
           {getTransactionIcon()}
-          <span>{getTransactionDisplay()}</span>
+          <span className="whitespace-nowrap">{getTransactionDisplay()}</span>
         </div>
       </div>
     </div>
