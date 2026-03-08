@@ -41,7 +41,7 @@ export function ExpenseCategoryCard({
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        <p className="text-sm font-medium text-gray-900">{name}</p>
+         <p className="text-sm font-medium text-gray-900 truncate">{name}</p>
         <p
           className={`text-base font-semibold ${isOverBudget ? 'text-red-700' : 'text-gray-700'}`}
         >

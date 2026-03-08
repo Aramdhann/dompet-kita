@@ -1,62 +1,14 @@
 'use client';
 
-import { Wallet, CreditCard, PiggyBank, WalletIcon } from 'lucide-react';
-import { WalletCard } from '@/components/wallet-card';
+import { WalletCard } from '@/components/cards/wallet-card';
+import { wallets } from '@/models/wallets';
+import { WalletIcon } from 'lucide-react';
+import { Button } from '../ui/button';
 import Link from 'next/link';
-import { Button } from './ui/button';
 
 interface WalletCardsProps {
   visible: boolean;
 }
-
-const wallets = [
-  {
-    name: 'BCA',
-    icon: CreditCard,
-    amount: 5000000,
-    color: 'text-blue-600 bg-blue-50',
-    lastTransaction: '7 Mar',
-    lastTransactionAmount: 12500000,
-    lastTransactionType: 'income' as const,
-  },
-  {
-    name: 'Mandiri',
-    icon: PiggyBank,
-    amount: 2000000,
-    color: 'text-yellow-600 bg-yellow-50',
-    lastTransaction: '5 Mar',
-    lastTransactionAmount: 750000,
-    lastTransactionType: 'transfer' as const,
-    lastTransactionDirection: 'outgoing' as const,
-  },
-  {
-    name: 'GoPay',
-    icon: Wallet,
-    amount: 1000000,
-    color: 'text-green-600 bg-green-50',
-    lastTransaction: '3 Mar',
-    lastTransactionAmount: 300000,
-    lastTransactionType: 'income' as const,
-  },
-  {
-    name: 'OVO',
-    icon: WalletIcon,
-    amount: 500000,
-    color: 'text-purple-600 bg-purple-50',
-    lastTransaction: '1 Mar',
-    lastTransactionAmount: 100000,
-    lastTransactionType: 'expense' as const,
-  },
-  {
-    name: 'DANA',
-    icon: Wallet,
-    amount: 300000,
-    color: 'text-blue-500 bg-blue-50',
-    lastTransaction: '28 Feb',
-    lastTransactionAmount: 100000,
-    lastTransactionType: 'income' as const,
-  },
-];
 
 export function WalletCards({ visible }: WalletCardsProps) {
   return (

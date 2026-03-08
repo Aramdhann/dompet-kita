@@ -64,7 +64,7 @@ export function WalletCard({
         )}
       </div>
       <div className="flex flex-col gap-1 flex-1">
-        <p className="text-sm font-medium text-gray-900">{name}</p>
+         <p className="text-sm font-medium text-gray-900 truncate">{name}</p>
       </div>
       <div className="flex flex-col gap-1">
         <p className="text-sm text-gray-500">
