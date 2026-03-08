@@ -38,7 +38,7 @@ export default function TransaksiPage() {
             categoryIcon={transaction.categoryIcon}
             categoryColor={transaction.categoryColor}
             amount={transaction.amount}
-            date={transaction.date}
+            transactionDate={transaction.transactionDate}
             type={transaction.type}
             direction={transaction.direction}
             visible={visible}

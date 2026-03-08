@@ -25,7 +25,7 @@ export function ExpenseCategoryCard({
 
   return (
     <div
-      className={`p-4 rounded-2xl shadow-sm border flex flex-col hover:shadow-md transition-shadow gap-3 ${isOverBudget ? 'bg-red-50 border-red-200' : 'bg-white border-gray-100'}`}
+      className={`p-4 rounded-2xl shadow-sm border flex flex-col hover:shadow-md transition-shadow gap-3 ${isOverBudget ? 'bg-red-50 border-red-200' : 'bg-white border-0'}`}
     >
       <div className="flex items-start justify-between gap-2">
         <div className={`p-2.5 rounded-xl ${color} w-fit`}>

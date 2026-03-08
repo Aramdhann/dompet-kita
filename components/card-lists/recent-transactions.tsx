@@ -33,12 +33,12 @@ export function RecentTransactions({ visible }: RecentTransactionsProps) {
       <div className="flex flex-col gap-3">
         {transactions.slice(0, 5).map((transaction) => (
           <TransactionCard
-            key={`${transaction.category}-${transaction.date}`}
+            key={transaction.id}
             category={transaction.category}
             categoryIcon={transaction.categoryIcon}
             categoryColor={transaction.categoryColor}
             amount={transaction.amount}
-            date={transaction.date}
+            transactionDate={transaction.transactionDate}
             type={transaction.type}
             direction={transaction.direction}
             visible={visible}

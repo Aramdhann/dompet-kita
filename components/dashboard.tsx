@@ -41,7 +41,7 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
               Pemasukan
             </p>
           </div>
-          <p className="text-base font-semibold text-emerald-200">
+          <p className="text-xs sm:text-sm md:text-base font-semibold text-emerald-200">
             {visible ? `+ Rp ${formatAmountWithPrefix(10000000)}` : '•••••••'}
           </p>
         </div>
@@ -53,7 +53,7 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
               Pengeluaran
             </p>
           </div>
-          <p className="text-base font-semibold text-rose-200">
+          <p className="text-xs sm:text-sm md:text-base font-semibold text-rose-200">
             {visible ? `- Rp ${formatAmountWithPrefix(10000000)}` : '•••••••'}
           </p>
         </div>

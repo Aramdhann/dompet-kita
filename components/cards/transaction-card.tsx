@@ -6,7 +6,7 @@ interface TransactionCardProps {
   categoryIcon: LucideIcon;
   categoryColor: string;
   amount: number;
-  date: string;
+  transactionDate: string;
   type: 'income' | 'expense' | 'transfer';
   direction?: 'incoming' | 'outgoing';
   visible: boolean;
@@ -18,7 +18,7 @@ export function TransactionCard({
   categoryIcon: CategoryIcon,
   categoryColor,
   amount,
-  date,
+  transactionDate,
   type,
   direction,
   visible,
@@ -47,17 +47,17 @@ export function TransactionCard({
   };
 
   return (
-    <div className="flex items-center justify-between p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+    <div className="flex items-center justify-between p-4 rounded-2xl bg-white shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-center gap-3">
         <div className={`p-2.5 rounded-xl ${categoryColor} w-fit`}>
           <CategoryIcon className="w-5 h-5 text-white" />
         </div>
         <div className="flex flex-col">
            <p className="text-sm font-medium text-gray-900">{category}</p>
-            <p className="text-[10px] text-gray-400">{date}</p>
+            <p className="text-[10px] text-gray-400">{transactionDate}</p>
              {description && (
-              <p className="text-xs text-gray-500 italic truncate max-w-50 sm:max-w-75 md:max-w-112.5">{description}</p>
-            )}
+              <p className="text-xs text-gray-500 italic truncate max-w-28">{description}</p>
+             )}
           </div>
       </div>
       <div className="flex flex-col items-end gap-1">
