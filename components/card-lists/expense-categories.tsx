@@ -43,7 +43,7 @@ export function ExpenseCategories({ visible }: ExpenseCategoriesProps) {
             visible={visible}
           />
         ))}
-        <Link href="/kategori" className="col-span-2">
+        <Link href="/kategori/tambah" className="col-span-2">
           <div className="p-4 rounded-2xl bg-blue-50 border-2 border-dashed border-blue-200 flex items-center justify-center gap-2 hover:bg-blue-100 transition-colors min-h-30">
             <Plus className="w-5 h-5 text-blue-600" />
             <p className="text-sm font-medium text-blue-600">Tambah Kategori</p>
