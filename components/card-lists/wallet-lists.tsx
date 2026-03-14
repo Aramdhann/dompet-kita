@@ -44,10 +44,8 @@ export function WalletCards({ visible }: WalletCardsProps) {
         ))}
         <Link href="/dompet/tambah" className="flex min-h-fit snap-start">
           <div className="min-w-35 p-4 rounded-2xl bg-blue-50 border-2 border-dashed border-blue-200 flex flex-col items-center justify-center gap-2 hover:bg-blue-100 transition-colors">
-            <p className="text-sm font-medium text-blue-600 text-center leading-tight">
-              <div className='flex items-center text-center'>
-                <Plus size={18} /> Tambah Dompet
-              </div>
+            <p className="flex items-center text-sm font-medium text-blue-600 text-center leading-tight">
+              <Plus size={18} /> Tambah Dompet
             </p>
           </div>
         </Link>
