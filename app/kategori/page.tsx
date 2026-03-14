@@ -11,6 +11,10 @@ export default function KategoriPage() {
   const router = useRouter();
   const [visible, setVisible] = useState(true);
 
+  const handleCategoryClick = (id: string) => {
+    router.push(`/kategori/${id}`);
+  };
+
   return (
     <div className="flex flex-col gap-4 p-5">
       <div className="flex items-center justify-between">
@@ -43,6 +47,7 @@ export default function KategoriPage() {
             budget={category.budget}
             color={category.color}
             visible={visible}
+            onClick={() => handleCategoryClick(category.id!)}
           />
         ))}
       </div>

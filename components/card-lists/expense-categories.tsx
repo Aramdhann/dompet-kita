@@ -5,12 +5,19 @@ import { Button, buttonVariants } from '../ui/button';
 import { categories } from '@/models/categories';
 import { ExpenseCategoryCard } from '@/components/cards/expense-category-card';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface ExpenseCategoriesProps {
   visible: boolean;
 }
 
 export function ExpenseCategories({ visible }: ExpenseCategoriesProps) {
+  const router = useRouter();
+
+  const handleCategoryClick = (id: string) => {
+    router.push(`/kategori/${id}`);
+  };
+
   return (
     <div className="flex flex-col gap-5 m-5">
       <div className="flex justify-between items-center">
@@ -41,6 +48,7 @@ export function ExpenseCategories({ visible }: ExpenseCategoriesProps) {
             budget={category.budget}
             color={category.color}
             visible={visible}
+            onClick={() => handleCategoryClick(category.id!)}
           />
         ))}
         <Link href="/kategori/tambah" className="col-span-2">
