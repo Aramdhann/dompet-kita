@@ -2,21 +2,28 @@
 
 import { WalletCard } from '@/components/cards/wallet-card';
 import { wallets } from '@/models/wallets';
-import { WalletIcon } from 'lucide-react';
+import { Plus, WalletIcon } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface WalletCardsProps {
   visible: boolean;
 }
 
 export function WalletCards({ visible }: WalletCardsProps) {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col gap-5 m-5">
       <div className="flex justify-between items-center">
         <p className="text-sm font-semibold text-gray-700">Dompet Saya</p>
-        <Button variant="outline" className="text-sm text-blue-700">
-          + Tambah
+        <Button
+          onClick={() => router.push('/dompet/tambah')}
+          variant="outline"
+          className="text-sm text-blue-700"
+        >
+          <Plus size={18} /> Tambah
         </Button>
       </div>
       <div className="flex gap-3 p-1 overflow-x-auto pb-2 scrollbar-hide scroll-smooth snap-x">
@@ -39,7 +46,9 @@ export function WalletCards({ visible }: WalletCardsProps) {
           <div className="p-4 rounded-2xl bg-blue-50 border-2 border-dashed border-blue-200 flex flex-col items-center justify-center gap-2 hover:bg-blue-100 transition-colors">
             <WalletIcon className="w-6 h-6 text-blue-600" />
             <p className="text-xs font-medium text-blue-600 text-center leading-tight">
-              Lihat semua dompet
+              <div>
+                <Plus size={18} /> Tambah
+              </div>
             </p>
           </div>
         </Link>

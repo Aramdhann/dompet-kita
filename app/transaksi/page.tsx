@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Plus } from 'lucide-react';
 import { TransactionCard } from '@/components/cards/transaction-card';
 import { Button } from '@/components/ui/button';
 import { transactions } from '@/models/transactions';
+import { useRouter } from 'next/navigation';
 
 export default function TransaksiPage() {
+  const router = useRouter();
   const [visible, setVisible] = useState(true);
 
   return (
@@ -15,11 +17,11 @@ export default function TransaksiPage() {
         <h1 className="text-lg font-bold text-gray-900">Semua Transaksi</h1>
         <div className="flex gap-2">
           <Button
-            onClick={() => setVisible(!visible)}
+            onClick={() => router.push("/transaksi/tambah?type=income")}
             variant="outline"
             className="text-sm text-blue-700"
           >
-            + Tambah
+            <Plus size={18} /> Tambah
           </Button>
           <Button
             onClick={() => setVisible(!visible)}

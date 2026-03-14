@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { Eye, EyeOff, Plus, LucideIcon } from 'lucide-react';
+import { Eye, EyeOff, Plus } from 'lucide-react';
 import { ExpenseCategoryCard } from '@/components/cards/expense-category-card';
 import { Button } from '@/components/ui/button';
 import { categories } from '@/models/categories';
+import { useRouter } from 'next/navigation';
 
 export default function KategoriPage() {
+  const router = useRouter();
   const [visible, setVisible] = useState(true);
 
   return (
@@ -15,11 +17,11 @@ export default function KategoriPage() {
         <h1 className="text-lg font-bold text-gray-900">Semua Kategori</h1>
         <div className="flex gap-2">
           <Button
-            onClick={() => setVisible(!visible)}
+            onClick={() => router.push("/kategori/tambah")}
             variant="outline"
             className="text-sm text-blue-700"
           >
-            + Tambah
+            <Plus size={18} /> Tambah
           </Button>
           <Button
             onClick={() => setVisible(!visible)}
