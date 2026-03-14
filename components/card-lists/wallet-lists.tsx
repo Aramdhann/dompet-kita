@@ -19,11 +19,11 @@ export function WalletCards({ visible }: WalletCardsProps) {
       <div className="flex justify-between items-center">
         <p className="text-sm font-semibold text-gray-700">Dompet Saya</p>
         <Button
-          onClick={() => router.push('/dompet/tambah')}
+          onClick={() => router.push('/dompet')}
           variant="outline"
           className="text-sm text-blue-700"
         >
-          <Plus size={18} /> Tambah
+          Lihat Semua
         </Button>
       </div>
       <div className="flex gap-3 p-1 overflow-x-auto pb-2 scrollbar-hide scroll-smooth snap-x">
@@ -42,12 +42,11 @@ export function WalletCards({ visible }: WalletCardsProps) {
             />
           </div>
         ))}
-        <Link href="/dompet" className="flex min-w-35 min-h-fit snap-start">
-          <div className="p-4 rounded-2xl bg-blue-50 border-2 border-dashed border-blue-200 flex flex-col items-center justify-center gap-2 hover:bg-blue-100 transition-colors">
-            <WalletIcon className="w-6 h-6 text-blue-600" />
-            <p className="text-xs font-medium text-blue-600 text-center leading-tight">
-              <div>
-                <Plus size={18} /> Tambah
+        <Link href="/dompet/tambah" className="flex min-h-fit snap-start">
+          <div className="min-w-35 p-4 rounded-2xl bg-blue-50 border-2 border-dashed border-blue-200 flex flex-col items-center justify-center gap-2 hover:bg-blue-100 transition-colors">
+            <p className="text-sm font-medium text-blue-600 text-center leading-tight">
+              <div className='flex items-center text-center'>
+                <Plus size={18} /> Tambah Dompet
               </div>
             </p>
           </div>
