@@ -17,7 +17,7 @@ export default function KategoriPage() {
         <h1 className="text-lg font-bold text-gray-900">Semua Kategori</h1>
         <div className="flex gap-2">
           <Button
-            onClick={() => router.push("/kategori/tambah")}
+            onClick={() => router.push('/kategori/tambah')}
             variant="outline"
             className="text-sm text-blue-700"
           >
@@ -35,7 +35,8 @@ export default function KategoriPage() {
       <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-3">
         {categories.map((category) => (
           <ExpenseCategoryCard
-            key={category.name}
+            key={category.id}
+            id={category.id}
             name={category.name}
             icon={category.icon}
             amount={category.amount}

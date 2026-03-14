@@ -255,7 +255,7 @@ function TambahTransaksiContent() {
 
             <Button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 h-10"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 h-12 rounded-xl text-sm font-semibold"
             >
               Simpan Pemasukan
             </Button>
@@ -409,7 +409,7 @@ function TambahTransaksiContent() {
 
             <Button
               type="submit"
-              className="w-full bg-red-500 hover:bg-red-600 h-10"
+              className="w-full bg-red-500 hover:bg-red-600 h-12 rounded-xl text-sm font-semibold"
             >
               Simpan Pengeluaran
             </Button>
@@ -565,7 +565,7 @@ function TambahTransaksiContent() {
 
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 h-10"
+              className="w-full bg-blue-600 hover:bg-blue-700 h-12 rounded-xl text-sm font-semibold"
             >
               Simpan Transfer
             </Button>

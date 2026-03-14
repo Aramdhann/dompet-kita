@@ -1,15 +1,18 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Plus } from "lucide-react";
-import { WalletCard } from "@/components/cards/wallet-card";
-import { Button } from "@/components/ui/button";
-import { wallets } from "@/models/wallets";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Eye, EyeOff, Plus } from 'lucide-react';
+import { WalletCard } from '@/components/cards/wallet-card';
+import { Button } from '@/components/ui/button';
+import { wallets } from '@/models/wallets';
 
 export default function DompetPage() {
   const router = useRouter();
   const [visible, setVisible] = useState(true);
+  const handleWalletClick = (id: string) => {
+    router.push(`/dompet/${id}`);
+  };
 
   return (
     <div className="flex flex-col gap-4 p-5">
@@ -17,7 +20,7 @@ export default function DompetPage() {
         <h1 className="text-lg font-bold text-gray-900">Semua Dompet</h1>
         <div className="flex gap-2">
           <Button
-            onClick={() => router.push("/dompet/tambah")}
+            onClick={() => router.push('/dompet/tambah')}
             variant="outline"
             className="text-sm text-blue-700"
           >
@@ -35,7 +38,8 @@ export default function DompetPage() {
       <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3">
         {wallets.map((wallet) => (
           <WalletCard
-            key={wallet.name}
+            key={wallet.id}
+            id={wallet.id}
             name={wallet.name}
             icon={wallet.icon}
             amount={wallet.amount}
@@ -45,6 +49,7 @@ export default function DompetPage() {
             lastTransactionAmount={wallet.lastTransactionAmount}
             lastTransactionType={wallet.lastTransactionType}
             lastTransactionDirection={wallet.lastTransactionDirection}
+            onClick={() => handleWalletClick(wallet.id!)}
           />
         ))}
       </div>

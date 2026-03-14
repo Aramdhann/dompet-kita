@@ -2,7 +2,7 @@
 
 import { WalletCard } from '@/components/cards/wallet-card';
 import { wallets } from '@/models/wallets';
-import { Plus, WalletIcon } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -13,6 +13,9 @@ interface WalletCardsProps {
 
 export function WalletCards({ visible }: WalletCardsProps) {
   const router = useRouter();
+  const handleWalletClick = (id: string) => {
+    router.push(`/dompet/${id}`);
+  };
 
   return (
     <div className="flex flex-col gap-5 m-5">
@@ -30,6 +33,8 @@ export function WalletCards({ visible }: WalletCardsProps) {
         {wallets.slice(0, 4).map((wallet) => (
           <div key={wallet.name} className="min-w-35 snap-start">
             <WalletCard
+              key={wallet.id}
+              id={wallet.id}
               name={wallet.name}
               icon={wallet.icon}
               amount={wallet.amount}
@@ -39,6 +44,7 @@ export function WalletCards({ visible }: WalletCardsProps) {
               lastTransactionAmount={wallet.lastTransactionAmount}
               lastTransactionType={wallet.lastTransactionType}
               lastTransactionDirection={wallet.lastTransactionDirection}
+              onClick={() => handleWalletClick(wallet.id!)}
             />
           </div>
         ))}

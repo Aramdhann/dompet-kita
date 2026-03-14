@@ -1,8 +1,19 @@
-import { LucideIcon, TrendingUp, TrendingDown, ArrowLeft, ArrowRight, Calendar } from 'lucide-react';
+'use client';
+
+import { useState } from 'react';
+import {
+  LucideIcon,
+  TrendingUp,
+  TrendingDown,
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+} from 'lucide-react';
 import { formatAmount, formatCompactAmount } from '@/lib/format';
 import { Card } from '@/components/ui/card';
 
 interface WalletCardProps {
+  id?: string;
   name: string;
   icon: LucideIcon;
   amount: number;
@@ -12,9 +23,11 @@ interface WalletCardProps {
   lastTransactionAmount?: number;
   lastTransactionType?: 'income' | 'expense' | 'transfer';
   lastTransactionDirection?: 'incoming' | 'outgoing';
+  onClick?: () => void;
 }
 
 export function WalletCard({
+  id = '',
   name,
   icon: Icon,
   amount,
@@ -24,6 +37,7 @@ export function WalletCard({
   lastTransactionAmount = 0,
   lastTransactionType,
   lastTransactionDirection,
+  onClick,
 }: WalletCardProps) {
   const isTransfer = lastTransactionType === 'transfer';
   const isIncome = lastTransactionType === 'income';
@@ -46,13 +60,24 @@ export function WalletCard({
 
   const getTransactionIcon = () => {
     if (isTransfer) {
-      return isIncoming ? <ArrowLeft className="w-3 h-3" /> : <ArrowRight className="w-3 h-3" />;
+      return isIncoming ? (
+        <ArrowLeft className="w-3 h-3" />
+      ) : (
+        <ArrowRight className="w-3 h-3" />
+      );
     }
-    return isIncome ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />;
+    return isIncome ? (
+      <TrendingUp className="w-3 h-3" />
+    ) : (
+      <TrendingDown className="w-3 h-3" />
+    );
   };
 
   return (
-    <Card className="p-4 hover:shadow-md transition-shadow relative gap-2">
+    <Card
+      className="p-4 hover:shadow-md transition-shadow relative gap-2 group cursor-pointer"
+      onClick={onClick}
+    >
       <div className="flex justify-between items-start w-full mb-2">
         <div className={`p-2.5 rounded-xl ${color} w-fit`}>
           <Icon className="w-5 h-5" />
@@ -65,14 +90,16 @@ export function WalletCard({
         )}
       </div>
       <div className="flex flex-col gap-1 flex-1">
-         <p className="text-sm font-medium text-gray-900 truncate">{name}</p>
+        <p className="text-sm font-medium text-gray-900 truncate">{name}</p>
       </div>
       <div className="flex flex-col gap-1">
         <p className="text-sm text-gray-500">
           {visible ? formatAmount(amount) : '••••••••'}
         </p>
         {lastTransactionAmount !== 0 && lastTransactionType && (
-          <div className={`flex items-center gap-1 text-xs ${getTransactionColor()}`}>
+          <div
+            className={`flex items-center gap-1 text-xs ${getTransactionColor()}`}
+          >
             {getTransactionIcon()}
             <span className="text-xs font-medium">
               {getTransactionDisplay()}
