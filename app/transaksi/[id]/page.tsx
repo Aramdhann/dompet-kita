@@ -104,7 +104,9 @@ export default function TransactionDetailPage() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => router.push(`/transaksi/${transaction.id}/edit`)}
+              >
                 <Edit className="w-4 h-4 mr-2" />
                 Edit
               </DropdownMenuItem>
