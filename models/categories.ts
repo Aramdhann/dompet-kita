@@ -171,4 +171,15 @@ export const categories: Category[] = [
     isCustom: false,
     createdAt: new Date('2026-02-01'),
   },
+  {
+    id: 'cat-12',
+    userId: 'user-1',
+    name: 'Gaji Bulanan',
+    icon: DollarSign,
+    amount: 0,
+    budget: 0,
+    color: 'bg-emerald-600',
+    isCustom: false,
+    createdAt: new Date('2026-02-01'),
+  },
 ];

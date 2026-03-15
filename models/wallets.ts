@@ -104,7 +104,7 @@ export const wallets: Wallet[] = [
     name: 'DANA',
     icon: WalletIcon,
     amount: 300000,
-    color: 'text-blue-500 bg-blue-50',
+    color: 'text-cyan-600 bg-cyan-50',
     isDefault: false,
     createdAt: new Date('2026-02-01'),
     lastTransaction: '28 Feb',
