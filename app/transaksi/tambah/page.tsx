@@ -8,14 +8,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  ArrowDownCircle,
-  ArrowUpCircle,
-  ArrowRightLeft,
-} from 'lucide-react';
+import { ArrowDownCircle, ArrowUpCircle, ArrowRightLeft } from 'lucide-react';
 import { WalletSelector } from '@/components/common/wallet-selector';
 import { CategorySelector } from '@/components/common/category-selector';
 import { DatePicker } from '@/components/common/date-picker';
+import { wallets } from '@/models/wallets';
+import { generateTransferCategory } from '@/lib/transfer';
 
 // ── Reusable: Common Form Fields ─────────────────────────────
 function CommonFields({
@@ -76,7 +74,31 @@ function TambahTransaksiContent({ typeParam }: { typeParam?: string }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('submit', activeTab);
+
+    if (activeTab === 'transfer') {
+      const fromWallet = wallets.find((w) => w.id === transferFrom);
+      const toWallet = wallets.find((w) => w.id === transferTo);
+
+      if (!fromWallet || !toWallet) {
+        console.error('Dompet asal atau tujuan tidak ditemukan');
+        return;
+      }
+
+      const transferCategoryFrom = generateTransferCategory(
+        'outgoing',
+        toWallet.name
+      );
+      const transferCategoryTo = generateTransferCategory(
+        'incoming',
+        fromWallet.name
+      );
+
+      console.log('Transfer transaction created:');
+      console.log('- From wallet:', fromWallet.name, transferCategoryFrom);
+      console.log('- To wallet:', toWallet.name, transferCategoryTo);
+    } else {
+      console.log('submit', activeTab);
+    }
   };
 
   return (

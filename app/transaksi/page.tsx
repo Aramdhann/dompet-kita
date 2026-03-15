@@ -17,7 +17,7 @@ export default function TransaksiPage() {
         <h1 className="text-lg font-bold text-gray-900">Semua Transaksi</h1>
         <div className="flex gap-2">
           <Button
-            onClick={() => router.push("/transaksi/tambah?type=income")}
+            onClick={() => router.push('/transaksi/tambah?type=income')}
             variant="outline"
             className="text-sm text-blue-700"
           >
@@ -36,6 +36,7 @@ export default function TransaksiPage() {
         {transactions.map((transaction) => (
           <TransactionCard
             key={transaction.id}
+            id={transaction.id}
             category={transaction.category}
             categoryIcon={transaction.categoryIcon}
             categoryColor={transaction.categoryColor}

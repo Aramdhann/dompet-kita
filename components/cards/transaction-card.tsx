@@ -7,8 +7,10 @@ import {
 } from 'lucide-react';
 import { formatAmount } from '@/lib/format';
 import { Card } from '@/components/ui/card';
+import { useRouter } from 'next/navigation';
 
 interface TransactionCardProps {
+  id?: string;
   category: string;
   categoryIcon: LucideIcon;
   categoryColor: string;
@@ -21,6 +23,7 @@ interface TransactionCardProps {
 }
 
 export function TransactionCard({
+  id,
   category,
   categoryIcon: CategoryIcon,
   categoryColor,
@@ -31,6 +34,8 @@ export function TransactionCard({
   visible,
   description,
 }: TransactionCardProps) {
+  const router = useRouter();
+
   const getTransactionDisplay = () => {
     if (type === 'transfer') {
       const label = direction === 'incoming' ? 'In' : 'Out';
@@ -63,8 +68,10 @@ export function TransactionCard({
 
   return (
     <>
-      {/* Kiri — icon + info, flex-1 supaya mengisi sisa ruang, min-w-0 supaya truncate bisa jalan */}
-      <Card className="flex-row items-center gap-3 p-4 hover:shadow-md transition-shadow">
+      <Card
+        className="flex-row items-center gap-3 p-4 hover:shadow-md transition-shadow cursor-pointer"
+        onClick={() => id && router.push(`/transaksi/${id}`)}
+      >
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <div className={`p-2.5 rounded-xl ${categoryColor} w-fit shrink-0`}>
             <CategoryIcon className="w-5 h-5 text-white" />

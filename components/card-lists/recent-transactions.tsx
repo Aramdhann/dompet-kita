@@ -34,6 +34,7 @@ export function RecentTransactions({ visible }: RecentTransactionsProps) {
         {transactions.slice(0, 5).map((transaction) => (
           <TransactionCard
             key={transaction.id}
+            id={transaction.id}
             category={transaction.category}
             categoryIcon={transaction.categoryIcon}
             categoryColor={transaction.categoryColor}
