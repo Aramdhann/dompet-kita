@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { ArrowLeft, Calendar, Wallet, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
@@ -24,7 +24,6 @@ function TambahTransaksiContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const typeParam = searchParams.get('type') || 'income';
-  const [activeTab, setActiveTab] = useState(typeParam);
 
   const [incomeWallet, setIncomeWallet] = useState('');
   const [incomeCategory, setIncomeCategory] = useState('');
@@ -33,11 +32,10 @@ function TambahTransaksiContent() {
   const [transferFrom, setTransferFrom] = useState('');
   const [transferTo, setTransferTo] = useState('');
 
-  useEffect(() => {
-    if (typeParam && ['income', 'expense', 'transfer'].includes(typeParam)) {
-      setActiveTab(typeParam);
-    }
-  }, [typeParam]);
+  const validTabs = ['income', 'expense', 'transfer'];
+  const [activeTab, setActiveTab] = useState(
+    validTabs.includes(typeParam ?? '') ? typeParam! : 'income'
+  );
 
   const handleTabChange = (value: string) => {
     setActiveTab(value);
