@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: 'Dompet Kita',
   description:
     'Catat pemasukan & pengeluaran bersama pasangan. Kelola dompet, kategori, dan keuangan keluarga dalam satu tempat.',
+  icons: {
+    icon: '/logo-dompet-kita.png',
+    apple: '/logo-dompet-kita.png',
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

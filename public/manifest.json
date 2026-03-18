@@ -1,0 +1,23 @@
+{
+  "name": "Dompet Kita",
+  "short_name": "Dompet Kita",
+  "description": "Catat pemasukan & pengeluaran bersama pasangan. Kelola dompet, kategori, dan keuangan keluarga dalam satu tempat.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/logo-dompet-kita.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-dompet-kita.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
