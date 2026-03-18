@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Mail, Lock, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Mail, Lock, ArrowRight, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -133,9 +134,12 @@ export default function LoginPage() {
 
         <p className="text-center text-sm text-gray-500 mt-6">
           Belum punya akun?{' '}
-          <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
-            Daftar sekarang
-          </a>
+          <Link
+            href="/daftar"
+            className="text-blue-600 hover:text-blue-700 font-medium"
+          >
+            Daftar sekarang juga
+          </Link>
         </p>
       </div>
     </div>
