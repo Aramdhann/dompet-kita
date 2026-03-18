@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import {
   TrendingUp,
   TrendingDown,
@@ -17,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { formatAmountWithPrefix } from '@/lib/format';
+import { currentUser } from '@/models/user';
 
 interface DashboardProps {
   visible: boolean;
@@ -26,26 +28,34 @@ interface DashboardProps {
 export function Dashboard({ visible, onToggle }: DashboardProps) {
   return (
     <>
-      <div className="flex items-center px-3 sm:px-5 py-3">
+      <div className="flex items-center justify-end px-3 sm:px-5 py-3">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <div className="flex items-center gap-2 cursor-pointer select-none outline-none">
+              <div className="text-right">
+                <p className="text-sm font-semibold text-gray-800">
+                  {currentUser.name}
+                </p>
+                <p className="text-xs text-gray-500">{currentUser.email}</p>
+              </div>
               <div className="relative">
-                <div className="w-9 h-9 rounded-full bg-linear-to-br from-blue-500 to-blue-600 text-white flex items-center justify-center shadow-sm border-2 border-white ring-1 ring-blue-200 hover:ring-2 hover:ring-blue-300 transition-all">
+                <div
+                  className={`w-9 h-9 rounded-full bg-linear-to-br ${currentUser.avatarColor} text-white flex items-center justify-center shadow-sm border-2 border-white ring-1 ring-blue-200 hover:ring-2 hover:ring-blue-300 transition-all`}
+                >
                   <User className="w-5 h-5" />
                 </div>
-                <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-gray-800">User 1</p>
-                <p className="text-xs text-gray-500">user@email.com</p>
+                {currentUser.isOnline && (
+                  <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
+                )}
               </div>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem className="gap-2 cursor-pointer">
-              <UserCircle className="w-4 h-4" />
-              <span>Profile</span>
+            <DropdownMenuItem asChild>
+              <Link href="/profile" className="gap-2 cursor-pointer">
+                <UserCircle className="w-4 h-4" />
+                <span>Profile</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="gap-2 cursor-pointer text-red-500 focus:text-red-500 focus:bg-red-50">
               <LogOut className="w-4 h-4" />
