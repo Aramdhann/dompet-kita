@@ -24,12 +24,12 @@ export default function ProfilePage() {
       <div className="flex flex-col min-h-screen px-4 py-6">
         <h1 className="text-xl font-bold text-gray-800 mb-6">Profile</h1>
         <div className="flex flex-col items-center gap-4">
-          <Skeleton className="w-24 h-24 rounded-full" />
-          <div className="space-y-2">
-            <Skeleton className="h-6 w-32" />
-            <Skeleton className="h-4 w-48" />
+          <Skeleton className="w-24 h-24 rounded-full bg-gray-200" />
+          <div className="space-y-2 flex flex-col items-center">
+            <Skeleton className="h-6 w-32 bg-gray-200" />
+            <Skeleton className="h-4 w-48 bg-gray-200" />
           </div>
-          <Skeleton className="h-6 w-24 rounded-full mt-2" />
+          <Skeleton className="h-6 w-24 rounded-full mt-2 bg-gray-200" />
         </div>
       </div>
     );
