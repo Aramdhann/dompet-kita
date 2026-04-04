@@ -11,6 +11,7 @@ import {
   UserCircle,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +19,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { formatAmountWithPrefix } from '@/lib/format';
-import { currentUser } from '@/models/user';
+import { signOut, useSession } from 'next-auth/react';
 
 interface DashboardProps {
   visible: boolean;
@@ -26,6 +27,37 @@ interface DashboardProps {
 }
 
 export function Dashboard({ visible, onToggle }: DashboardProps) {
+  const { data: session, status } = useSession();
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/login' });
+  };
+
+  if (status === 'loading') {
+    return (
+      <>
+        <div className="flex items-center justify-end px-3 sm:px-5 py-3">
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-4 w-24 bg-gray-200" />
+            <Skeleton className="h-9 w-9 rounded-full bg-gray-200" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-3 sm:gap-5 mx-3 sm:mx-5 p-4 sm:p-6 rounded-2xl sm:rounded-3xl text-white bg-blue-600 shadow-md">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-3 w-24" />
+            </div>
+            <Skeleton className="h-8 w-40" />
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (!session?.user) {
+    return null;
+  }
+
   return (
     <>
       <div className="flex items-center justify-end px-3 sm:px-5 py-3">
@@ -34,19 +66,17 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
             <div className="flex items-center gap-2 cursor-pointer select-none outline-none">
               <div className="text-right">
                 <p className="text-sm font-semibold text-gray-800">
-                  {currentUser.name}
+                  {session.user.name || 'User'}
                 </p>
-                <p className="text-xs text-gray-500">{currentUser.email}</p>
+                <p className="text-xs text-gray-500">
+                  @{session.user.username || 'user'}
+                </p>
               </div>
               <div className="relative">
-                <div
-                  className={`w-9 h-9 rounded-full bg-linear-to-br ${currentUser.avatarColor} text-white flex items-center justify-center shadow-sm border-2 border-white ring-1 ring-blue-200 hover:ring-2 hover:ring-blue-300 transition-all`}
-                >
+                <div className="w-9 h-9 rounded-full bg-linear-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center shadow-sm border-2 border-white ring-1 ring-blue-200 hover:ring-2 hover:ring-blue-300 transition-all">
                   <User className="w-5 h-5" />
                 </div>
-                {currentUser.isOnline && (
-                  <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
-                )}
+                <div className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" />
               </div>
             </div>
           </DropdownMenuTrigger>
@@ -57,7 +87,10 @@ export function Dashboard({ visible, onToggle }: DashboardProps) {
                 <span>Profile</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem className="gap-2 cursor-pointer text-red-500 focus:text-red-500 focus:bg-red-50">
+            <DropdownMenuItem
+              className="gap-2 cursor-pointer text-red-500 focus:text-red-500 focus:bg-red-50"
+              onClick={handleLogout}
+            >
               <LogOut className="w-4 h-4" />
               <span>Logout</span>
             </DropdownMenuItem>

@@ -20,6 +20,7 @@
 export interface User {
   id?: string;
   name: string;
+  username: string;
   email: string;
   profession: string;
   avatarColor?: string;
@@ -36,6 +37,7 @@ export interface User {
 export const currentUser: User = {
   id: 'user-1',
   name: 'User 1',
+  username: 'user_1',
   email: 'user@email.com',
   profession: 'Fullstack Developer',
   avatarColor: 'from-blue-500 to-blue-600',

@@ -38,6 +38,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import Image from 'next/image';
 
 const PROFESI_OPTIONS = [
   'Karyawan Swasta',
@@ -53,6 +54,7 @@ const PROFESI_OPTIONS = [
 
 export default function DaftarPage() {
   const [nama, setNama] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [profesi, setProfesi] = useState('');
@@ -60,7 +62,7 @@ export default function DaftarPage() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const handleDaftarClick = () => {
-    if (nama && email && password && profesi) {
+    if (nama && username && email && password && profesi) {
       setShowConfirmModal(true);
     }
   };
@@ -77,6 +79,7 @@ export default function DaftarPage() {
 
   const handleBatal = () => {
     setNama('');
+    setUsername('');
     setEmail('');
     setPassword('');
     setProfesi('');
@@ -87,10 +90,11 @@ export default function DaftarPage() {
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-8">
           <div className="w-20 h-20 mb-4">
-            <img
+            <Image
               src="/logo-dompet-kita.png"
               alt="Dompet Kita Logo"
-              className="w-full h-full object-contain"
+              width={110}
+              height={110}
             />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Dompet Kita</h1>
@@ -119,6 +123,24 @@ export default function DaftarPage() {
                       placeholder="John Doe"
                       value={nama}
                       onChange={(e) => setNama(e.target.value)}
+                      className="pl-10 h-11"
+                      required
+                    />
+                  </div>
+                </FieldContent>
+              </Field>
+
+              <Field orientation="vertical">
+                <FieldLabel htmlFor="username">Username</FieldLabel>
+                <FieldContent>
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Input
+                      id="username"
+                      type="text"
+                      placeholder="john"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
                       className="pl-10 h-11"
                       required
                     />
@@ -197,7 +219,12 @@ export default function DaftarPage() {
                   type="button"
                   onClick={handleDaftarClick}
                   disabled={
-                    isLoading || !nama || !email || !password || !profesi
+                    isLoading ||
+                    !nama ||
+                    !username ||
+                    !email ||
+                    !password ||
+                    !profesi
                   }
                   className="flex-1 h-11 bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium transition-all duration-300 active:scale-[0.98] active:from-blue-700 active:to-blue-800 shadow-md hover:shadow-lg hover:shadow-blue-200 active:shadow-sm"
                 >
@@ -245,6 +272,10 @@ export default function DaftarPage() {
                 <div>
                   <span className="font-medium text-gray-700">Nama:</span>{' '}
                   <span className="text-gray-600">{nama}</span>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">Username:</span>{' '}
+                  <span className="text-gray-600">{username}</span>
                 </div>
                 <div>
                   <span className="font-medium text-gray-700">Email:</span>{' '}

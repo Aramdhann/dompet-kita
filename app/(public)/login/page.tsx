@@ -14,21 +14,39 @@ import {
 } from '@/components/ui/card';
 import { Field, FieldLabel, FieldContent } from '@/components/ui/field';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
 
-    setTimeout(() => {
+    try {
+      const result = await signIn('credentials', {
+        identifier,
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError('Email, username atau password salah');
+      } else {
+        router.push('/');
+        router.refresh();
+      }
+    } catch {
+      setError('Terjadi kesalahan saat login');
+    } finally {
       setIsLoading(false);
-      router.push('/');
-    }, 1000);
+    }
   };
 
   return (
@@ -36,10 +54,11 @@ export default function LoginPage() {
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center mb-8">
           <div className="w-20 h-20 mb-4">
-            <img
+            <Image
               src="/logo-dompet-kita.png"
               alt="Dompet Kita Logo"
-              className="w-full h-full object-contain"
+              width={110}
+              height={110}
             />
           </div>
           <h1 className="text-2xl font-bold text-gray-800">Dompet Kita</h1>
@@ -50,24 +69,31 @@ export default function LoginPage() {
 
         <Card className="border-2 border-blue-100">
           <CardHeader>
-            <CardTitle className="text-xl text-center">Masuk</CardTitle>
+            <CardTitle className="text-xl text-center">Login</CardTitle>
             <CardDescription className="text-center">
-              Masukkan email dan password Anda untuk melanjutkan
+              Masukkan email atau username dan password Anda untuk melanjutkan
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {error && (
+              <div className="mb-4 p-3 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg">
+                {error}
+              </div>
+            )}
             <form onSubmit={handleLogin} className="space-y-4">
               <Field orientation="vertical">
-                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <FieldLabel htmlFor="identifier">
+                  Email atau Username
+                </FieldLabel>
                 <FieldContent>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="nama@email.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      id="identifier"
+                      type="text"
+                      placeholder="nama@email.com atau username"
+                      value={identifier}
+                      onChange={(e) => setIdentifier(e.target.value)}
                       className="pl-10 h-11"
                       required
                     />

@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { User, Briefcase, LogOut, Trash2 } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
+import { LogOut, Trash2, UserCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { SlideToConfirmModal } from '@/components/modals/slide-to-confirm-modal';
-import { currentUser } from '@/models/user';
 
 export default function ProfilePage() {
+  const { data: session, status } = useSession();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const handleDeleteAccount = () => {
@@ -14,8 +16,28 @@ export default function ProfilePage() {
   };
 
   const handleLogout = () => {
-    console.log('Logged out');
+    signOut({ callbackUrl: '/login' });
   };
+
+  if (status === 'loading') {
+    return (
+      <div className="flex flex-col min-h-screen px-4 py-6">
+        <h1 className="text-xl font-bold text-gray-800 mb-6">Profile</h1>
+        <div className="flex flex-col items-center gap-4">
+          <Skeleton className="w-24 h-24 rounded-full" />
+          <div className="space-y-2">
+            <Skeleton className="h-6 w-32" />
+            <Skeleton className="h-4 w-48" />
+          </div>
+          <Skeleton className="h-6 w-24 rounded-full mt-2" />
+        </div>
+      </div>
+    );
+  }
+
+  if (!session?.user) {
+    return null;
+  }
 
   return (
     <>
@@ -24,24 +46,20 @@ export default function ProfilePage() {
 
         <div className="flex flex-col items-center mb-8">
           <div className="relative mb-4">
-            <div
-              className={`w-24 h-24 rounded-full bg-gradient-to-br ${currentUser.avatarColor} text-white flex items-center justify-center shadow-lg border-4 border-white ring-1 ring-blue-200`}
-            >
-              <User className="w-12 h-12" />
+            <div className="w-24 h-24 rounded-full bg-linear-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center shadow-lg border-4 border-white ring-1 ring-blue-200">
+              {session.user.name?.charAt(0).toUpperCase() || 'U'}
             </div>
-            {currentUser.isOnline && (
-              <div className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-white" />
-            )}
+            <div className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-white" />
           </div>
 
           <h2 className="text-2xl font-bold text-gray-800 mb-1">
-            {currentUser.name}
+            {session.user.name || 'User'}
           </h2>
-          <p className="text-gray-500 mb-1">{currentUser.email}</p>
+          <p className="text-gray-500 mb-1">{session.user.email}</p>
 
-          <div className="flex items-center gap-2 text-gray-600 bg-gray-100 px-4 py-2 rounded-full mt-2">
-            <Briefcase className="w-4 h-4" />
-            <span className="text-sm">{currentUser.profession}</span>
+          <div className="flex items-center gap-2 text-gray-600 bg-gray-200 px-4 py-2 rounded-full mt-2">
+            <UserCircle className="w-4 h-4" />
+            <span className="text-xs"> @{session.user.username || 'user'}</span>
           </div>
         </div>
 
